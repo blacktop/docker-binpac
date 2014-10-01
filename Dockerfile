@@ -2,22 +2,25 @@ FROM blacktop/bro:latest
 
 MAINTAINER blacktop, https://github.com/blacktop
 
-# Install Bro Required Dependencies
+# Install Required Dependencies
 RUN apt-get -qq update && apt-get install -yq libpapi-dev libgoogle-perftools-dev
 # RUN apt-get -y install gdb
 
 # Compile and install LLVM/clang
 ENV PATH /opt/llvm/bin:$PATH
 RUN  \
+  cd /opt && \
   git clone https://github.com/rsmmr/install-clang.git && \
-  /install-clang/install-clang -j 4 -C /opt/llvm
+  /opt/install-clang/install-clang -C /opt/llvm && \
+  rm -rf /install-clang
 
 # Setup HILTI.
 ENV PATH $PATH:/usr/local/bro/bin:/nsm/bro/aux/btest
-ENV PATH $PATH:/hilti/tools:/hilti/build/tools::/hilti/build/tools/pac-driver
+ENV PATH $PATH:/opt/hilti/tools:/opt/hilti/build/tools::/opt/hilti/build/tools/pac-driver
 RUN  \
+  cd /opt && \
   git clone git://www.icir.org/hilti && \
-  cd hilti && make -j 5 BRO_DIST=/nsm/bro && \
+  cd hilti && make BRO_DIST=/nsm/bro && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
