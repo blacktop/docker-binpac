@@ -1,5 +1,4 @@
-![binpac-logo](https://raw.githubusercontent.com/blacktop/docker-binpac/master/logo.png)
-HILTI and BinPAC++ Dockerfile
+![binpac-logo](https://raw.githubusercontent.com/blacktop/docker-binpac/master/logo.png) HILTI and BinPAC++ Dockerfile
 ==================
 
 This repository contains a **Dockerfile** of [HILTI and BinPAC++](http://www.icir.org/hilti/) for [Docker](https://www.docker.io/)'s [trusted build](https://index.docker.io/u/blacktop/binpac/) published to the public [Docker Registry](https://index.docker.io/).
